@@ -13,6 +13,9 @@ class VaccinedController extends Controller {
     public function actionTest1(){
         echo "test roting";
     }
+     public function actionTest2(){
+        echo "test roting";
+    }
 
     public function actionCoverage() {
         $filtersForm = new FiltersForm();
