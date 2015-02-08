@@ -1,15 +1,6 @@
-<div class='container'>
-<?php 
-$this->widget('zii.widgets.CBreadcrumbs', array(
-    'links'=>array(
-       'การตรวจ HbA1C รายหน่วยบริการ'=>array('/labfu/hba1c'),
-        'ผลการตรวจ HbA1C ครั้งล่าสุด ',
-    ),
-));
-?>
 <h4  align="center"> <?php echo "ทะเบียนผู้ป่วยเบาหวาน รพ.สต.".$HOSPCODE ;?> </h4>
 
-
+<div class='container'>
 <?php
 
 $this->widget('zii.widgets.grid.CGridView', array(
@@ -71,8 +62,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
          array(
             'header' => 'ผล HbA1C',
-            'name' => 'LABRESULT',
+            'name' => 'LABRESULT',             
         ),
+//        array(
+//            'header' => 'ผล HbA1C',
+//            'name' => 'LABRESULT',
+//            'type' => 'html',
+//            'value' => '($data->field > 7) ? "<span class=\"color:red;\">" . $data->LABRESULT. "</span>" : $data->LABRESULT',
+//        ),
     ),
     ));
 ?>

@@ -1,15 +1,19 @@
-<div class='container'>
-<?php 
+
+
+<h4  align="center"> <?php echo "ทะเบียนผู้ป่วยเบาหวาน" ;?> </h4>
+
+<div class="panel panel-primary">
+    <?php 
 $this->widget('zii.widgets.CBreadcrumbs', array(
     'links'=>array(
-       'การตรวจ HbA1C รายหน่วยบริการ'=>array('/labfu/hba1c'),
-        'ผลการตรวจ HbA1C ครั้งล่าสุด ',
+        'HbA1C'=>array('labfu/hba1c'),
+        'DM Registration',
     ),
 ));
 ?>
-<h4  align="center"> <?php echo "ทะเบียนผู้ป่วยเบาหวาน รพ.สต.".$HOSPCODE ;?> </h4>
-
-
+    <hr>
+    <div class="panel-heading"> <?php echo "รพ.สต.".$HOSPCODE ;?> </div>
+<div class='panel-body'>
 <?php
 
 $this->widget('zii.widgets.grid.CGridView', array(
@@ -51,29 +55,24 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
          array(
             'header' => 'ICD-10',
-            'name' => 'DM_DX',
+            'name' => 'DM_DX_ASC',
         ),
          array(
             'header' => 'วันที่วินิจฉัยล่าสุด',
-            'name' => 'LASTDx',
+            'name' => 'FIRSTDx',
         ),
          array(
-            'header' => 'โรค HT',
+            'header' => 'โรคความดันโลหิตสูง',
             'name' => 'DMWITHHT',
         ),
          array(
             'header' => 'โรคเรื้อรังอื่นๆ',
             'name' => 'DMWITOTHER',
+           //  'htmlOptions' => array("width" => "10%", 'style' => 'text-align: left;')
         ),
-          array(
-            'header' => 'วันที่ตรวจ HbA1C',
-            'name' => 'DATE_SERV',
-        ),
-         array(
-            'header' => 'ผล HbA1C',
-            'name' => 'LABRESULT',
-        ),
+        
     ),
     ));
 ?>
+</div>
 </div>

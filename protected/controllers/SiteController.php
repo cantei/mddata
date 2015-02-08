@@ -1,10 +1,11 @@
 <?php
 
-class SiteController extends Controller {
-
-    /**
-     * Declares class-based actions.
-     */
+class SiteController extends Controller
+{
+    public $layout='//layouts/column1';
+	/**
+	 * Declares class-based actions.
+	 */
     public function actions() {
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
@@ -20,129 +21,156 @@ class SiteController extends Controller {
         );
     }
 
-    /**
-     * This is the default 'index' action that is invoked
-     * when an action is not explicitly requested by users.
-     */
-public function actionIndex()
-{
-// renders the view file 'protected/views/site/index.php'
-// using the default layout 'protected/views/layouts/main.php'
-if (!empty($_POST)) {
-$host = $_POST['host'];
-$user = $_POST['username'];
-$pass = $_POST['password'];
-$db = $_POST['database'];
-$fp = fopen('protected/config/config.php', 'w');
-fwrite($fp, '<?php');
-fwrite($fp, "\n");
-fwrite($fp, '$host = \''.$host.'\';');
-fwrite($fp, "\n");
-fwrite($fp, '$user = \''.$user.'\';');
-fwrite($fp, "\n");
-fwrite($fp, '$pass = \''.$pass.'\';');
-fwrite($fp, "\n");
-fwrite($fp, '$db = \''.$db.'\';');
-fwrite($fp, "\n");
-fwrite($fp, '?>');
-fclose($fp);
-$sql = "
-CREATE TABLE IF NOT EXISTS tb_test(
-id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-name VARCHAR(255) NOT NULL
-)
-";
-Yii::app()->db->createCommand($sql)->execute();
-$sql = "
-CREATE TABLE IF NOT EXISTS tb_test2(
-id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-name VARCHAR(255) NOT NULL
-)
-";
-Yii::app()->db->createCommand($sql)->execute();
-$sql = "
-CREATE TABLE IF NOT EXISTS tb_test3(
-id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-name VARCHAR(255) NOT NULL
-)
-";
-Yii::app()->db->createCommand($sql)->execute();
-$sql = "
-INSERT INTO tb_test3(name) VALUES('row1');
-INSERT INTO tb_test3(name) VALUES('row2');
-INSERT INTO tb_test3(name) VALUES('row3');
-INSERT INTO tb_test3(name) VALUES('row4');
-INSERT INTO tb_test3(name) VALUES('row5');
-";
-Yii::app()->db->createCommand($sql)->execute();
-}
-$this->render('index');
-}
+    public function actionSitemapxml()	{
 
-    /**
-     * This is the action to handle external exceptions.
-     */
-    public function actionError() {
-        if ($error = Yii::app()->errorHandler->error) {
-            if (Yii::app()->request->isAjaxRequest)
-                echo $error['message'];
-            else
-                $this->render('error', $error);
-        }
+//	    $course=Course::model()->findAll(array(
+//	            'order'=>'id DESC',
+//	            //'condition'=>'status="1"',
+//	    ));
+//
+//	    $blog=Blog::model()->findAll(array(
+//	            'order'=>'id DESC',
+//	            'condition'=>'status="1"',
+//	    ));        
+//
+//	    $shop=Shop::model()->findAll(array(
+//	            'order'=>'id DESC',
+//	            'condition'=>'status="1"',
+//	    ));
+//
+//	    $portfolio=Portfolio::model()->findAll(array(
+//	            'order'=>'id DESC',
+//	            //'condition'=>'status="1"',
+//	    ));
+//
+//	    $users=Users::model()->findAll(array(
+//	            'order'=>'id DESC',
+//	            //'condition'=>'status="1"',
+//	    ));
+//
+//	    header('Content-Type: application/xml');
+//	    $this->renderPartial('../site/sitemapxml',array(
+//	    	'course'=>$course,
+//	    	'blog'=>$blog,
+//	    	'shop'=>$shop,
+//	    	'portfolio'=>$portfolio,
+//	    	'users'=>$users,
+//	    	));
     }
 
-    /**
-     * Displays the contact page
-     */
-    public function actionContact() {
-        $model = new ContactForm;
-        if (isset($_POST['ContactForm'])) {
-            $model->attributes = $_POST['ContactForm'];
-            if ($model->validate()) {
-                $name = '=?UTF-8?B?' . base64_encode($model->name) . '?=';
-                $subject = '=?UTF-8?B?' . base64_encode($model->subject) . '?=';
-                $headers = "From: $name <{$model->email}>\r\n" .
-                        "Reply-To: {$model->email}\r\n" .
-                        "MIME-Version: 1.0\r\n" .
-                        "Content-Type: text/plain; charset=UTF-8";
+    public function actionIndex(){
+	// renders the view file 'protected/views/site/index.php'
+	// using the default layout 'protected/views/layouts/main.php'
+	$this->render('index');
+    }
 
-                mail(Yii::app()->params['adminEmail'], $subject, $model->body, $headers);
-                Yii::app()->user->setFlash('contact', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                $this->refresh();
+	/**
+	 * Displays the contact page
+	 */
+    public function actionContact()	{
+        $this->render('contact');
+    }
+
+	/**
+	 * This is the action to handle external exceptions.
+	 */
+    public function actionError(){
+	if($error=Yii::app()->errorHandler->error){
+            if(Yii::app()->request->isAjaxRequest)
+		echo $error['message'];
+		else
+		$this->render('error', $error);
+	}
+    }
+
+    public function actionRegister(){
+	$model=new Users ('register');
+        // collect user input data
+
+        if(isset($_POST['Users']))
+        {
+            $model->attributes=$_POST['Users'];
+            $uniqueName = $model->username.'.jpg';
+            $original = 'upload/ProfilePicture/'.$uniqueName;
+            $picture = CUploadedFile::getInstance($model, 'picture');
+
+            if (!empty($picture)) {
+	            $model->picture = $picture;
+	            $model->picture->saveAs($original);
+	            $model->picture = '/upload/ProfilePicture/'.$uniqueName;
+	            $thumb=Yii::app()->phpThumb->create($original);
+                    $thumb->adaptiveResize(250,250);
+                    $thumb->save($original);
+            }
+            if($model->validate())
+            {
+                if($model->save()){
+                    Yii::app()->user->setFlash('response','');
+                    $this->refresh();
+                }
             }
         }
-        $this->render('contact', array('model' => $model));
+	$this->render('register',array('model'=>$model));
     }
 
-    /**
-     * Displays the login page
-     */
-    public function actionLogin() {
-        $model = new LoginForm;
-
-        // if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-
-        // collect user input data
-        if (isset($_POST['LoginForm'])) {
-            $model->attributes = $_POST['LoginForm'];
-            // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login())
-                $this->redirect(Yii::app()->user->returnUrl);
-        }
-        // display the login form
-        $this->render('login', array('model' => $model));
+    public function actionRecoverypassword(){
+    	if(isset($_GET['email'])){
+                    $email = $_GET['email'];
+                    $data=EditUsers::model()->findAll('email=:email', array(':email'=>$email));
+                    if($data==NULL){
+        		throw new CHttpException(555,Yii::t('app','Not found email in database.'));
+                    }
+                    $data=$data['0'];
+                    $password = rand(100000,999999);
+                    $md5password = md5($password);  
+                    $update = Users::model()->updateByPk(array($data->id),array('password'=>$md5password));
+                    if($update){
+        		$from_emailom_name = 'Palaloy.com';
+			$from_email = 'Gamezxz@gmail.com';
+			$to_name = $data->display_name;
+			$to_email = $data->email;
+			$subject = 'New Password for Palaloy.com';
+			$message = 'Your new password is : '.$password;
+			Email::sendGmail($from_name,$from_email, $to_name,$to_email, $subject, $message);
+                    }
+                    $this->render('recoverypassword',array(
+				'data'=>$data,
+                    ));
+		} else {
+                    throw new CHttpException(404,'The requested page does not exist.');
+		}  
     }
 
-    /**
-     * Logs out the current user and redirect to homepage.
-     */
-    public function actionLogout() {
-        Yii::app()->user->logout();
-        $this->redirect(Yii::app()->homeUrl);
+	/**
+	 * Displays the login page
+	 */
+    public function actionLogin(){
+		$model=new LoginForm;
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login())
+				$this->redirect(Yii::app()->createUrl('caseforest/admin'));
+		}
+		// display the login form
+		$this->render('login',array('model'=>$model));
     }
 
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
 }

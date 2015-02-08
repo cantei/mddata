@@ -1,69 +1,36 @@
 <?php
 class ChronicsController extends Controller {
-        public function actionIndex(){
+    public function actionIndex() {
+        $cyear = '2015';
+        $filtersForm = new FiltersForm();
+        if (isset($_GET['FiltersForm']))
+        $filtersForm->filters = $_GET['FiltersForm'];
+        $sql = "SELECT c.HOSPCODE,h.hosname 
+                        ,sum(if(NOT ISNULL(c.DM_DX_ASC) AND  ISNULL(c.HT_DX_ASC) AND   ISNULL(c.OTHER_DX_ASC)  ,1,0)) as nDM
+                        ,sum(if(NOT ISNULL(c.HT_DX_ASC) AND  ISNULL(c.DM_DX_ASC) AND   ISNULL(c.OTHER_DX_ASC)  ,1,0)) as nHT
+                        ,sum(if(NOT ISNULL(c.HT_DX_ASC) AND  NOT ISNULL(c.DM_DX_ASC) AND   ISNULL(c.OTHER_DX_ASC)  ,1,0)) as nDMHT
+                        ,sum(if(NOT ISNULL(c.OTHER_DX_ASC) AND  ISNULL(c.HT_DX_ASC) AND   ISNULL(c.DM_DX_ASC)   ,1,0)) as nOTHER
+                        FROM tmp_me_chronic c
+                        LEFT JOIN chospital h 
+                        ON c.HOSPCODE=h.hoscode  
+                        GROUP BY c.HOSPCODE";
+        $rawData = Yii::app()->db->createCommand($sql)->queryAll();
 
-  
-//       $sql = "SELECT DISTINCT d.date_serv
-//               FROM drug_opd d
-//               WHERE d.DATE_SERV > '2013-09-30' 
-//               AND d.HOSPCODE='07711' 
-//               AND	 d.PID='10035'
-//               ORDER BY d.date_serv DESC ";
-//        $rawData = Yii::app()->db->createCommand($sql)->queryAll();
-//       
-//        $dataProvider = new CArrayDataProvider($rawData, array(
-//            'keyField' => 'date_serv',
-//             'totalItemCount' => count($rawData),
-//
-//        ));
-//        
-//        // print_r($dataProvider);
-//       
-//             $array= print_r($dataProvider);
-//             //  return;
-      $model = new TmpMeChronic();
-    $dataProvider = new CActiveDataProvider($model, array
-     (
-             'criteria'=>array
-             (
-                     'select'=>'HOSPCODE,PID,CID'  // คอลัมน์ที่อยากแสดง
-             ),
- 
-     
-             'pagination'=>array('pageSize'=>5), //จำนวนที่ต้องการแสดงต่อหน้า
-     ));
- 
- 
-    $this->render('index',array(
-        'dataProvider'=>$dataProvider,
-    ));
-    }
-    public function actionIndex2() {
-// http://www.yii.in.th/forum/index.php?topic=384.0
-        $dataProvider1 = new CActiveDataProvider('TmpMeChronic', array(
-                                'pagination' => array(
-                                'pageSize' => 10,
-                                 ),   
-
-                  ));
-        
-        
-        $sql = "SELECT * FROM tmp_me_chronic";
-        $dataProvider2 = new CSqlDataProvider($sql, array(
+        $filtersData = $filtersForm->filter($rawData);
+        $dataProvider = new CArrayDataProvider($filtersData, array(
             'keyField' => 'HOSPCODE',
-            'pagination' => array(
-                'pageSize' => 20,
-            ),
+            'totalItemCount' => count($rawData),
+            'pagination' => false,
+//            'sort' => array(
+//                'attributes' => array_keys($rawData[0])
+//            )
         ));
-        
-      print_r($dataProvider1).'<br>';
-      // return;
-      $this->render('index2', array(
-          'dataProvider1'=>$dataProvider1,
-    
-           // 'dataProvider2'=>$dataProvider2,    
-              ));
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+            'filtersForm' => $filtersForm,
+            'sql' => $sql
+        ));
     }
-
 
 }
+?>

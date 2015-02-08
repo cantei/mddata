@@ -1,25 +1,10 @@
-<div class='container'>
-<div class="row">      
-<?php 
-$this->widget('zii.widgets.CBreadcrumbs', array(
-    'links'=>array(
-       // 'Sample post'=>array('post/view', 'id'=>12),
-        'ผลการให้บริการวัคซีน',
-    ),
-));
-?>
-    <br>
-</div>
-    <div class='row'>
-            
-                <h4 class=" text-color" align='center'>ผลการให้บริการวัคซีนปีงบประมาณ 2558 </h4>
-                <h5 class=" text-color" align='center'>เครือข่ายบริการอำเภอเมืองเพชรบูรณ์ </h5>
 
-
+    <div id="panel1" class="panel panel-default">
+        <h4 class=" text-color" align='center'>ผลการให้บริการวัคซีนปีงบประมาณ 2558 </h4>
+        <h5 class=" text-color" align='center'>เครือข่ายบริการอำเภอเมืองเพชรบูรณ์ </h5>
+        
     </div>
-
-    <hr>
-<div class='row' >
+    <div class='well' >
         <form method='POST'>
             <?php echo "กรุณาเลือกวันบริการ :  ";
             ?>
@@ -52,8 +37,8 @@ $this->widget('zii.widgets.CBreadcrumbs', array(
             ?>
             <button type='submit' class='btn btn-primary'>ประมวลผล</button>
         </form>
-    </div> <hr>
-<div class='row'>
+    </div>
+
 <?php //print_r($dataProvider); ?>
 
     <?php
@@ -67,6 +52,12 @@ $this->widget('zii.widgets.CBreadcrumbs', array(
                 'name'=>'HOSPCODE',
                 'header' => 'รหัสหน่วยบริการ',
                 'htmlOptions' => array('style' => 'width:100px;'),
+                'value'=>function($data){ ?>
+                    <a href="<?=Yii::app()->createUrl('vaccined/viewdetail'
+                            ,array('hospcode'=>$data['HOSPCODE']))?>"
+                            ><?=$data['HOSPCODE']?>
+                    </a>
+                <?php }
             ),
             array(
                 'name' => 'HNAME',
@@ -385,12 +376,15 @@ $this->widget('zii.widgets.CBreadcrumbs', array(
                     </a>
                 <?php }
             ),                    
+                    
+                    
+                    
+
 
         ),
     ));
     ?>
-</div>
-<?php //  echo $startdate.'<br>'; ?>
-<?php  // echo $enddate.'<br>'; ?>
-<?php  // echo  $sql.'<br>'; ?>
-</div>
+
+<?php  echo $startdate.'<br>'; ?>
+<?php  echo $enddate.'<br>'; ?>
+<?php  echo  $sql.'<br>'; ?>

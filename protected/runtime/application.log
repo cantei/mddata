@@ -6937,3 +6937,2106 @@ REQUEST_URI=/mddata/index.php?r=vaccined/coverage
 in D:\xampp\htdocs\mddata\protected\views\vaccined\coverage.php (110)
 in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (58)
 in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/02 08:16:42 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't0.hosname' in 'field list'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT t0.HOSPCODE,t0.hosname 
+                            ,t0.male,t0.female,t0.total,t0.nhouse
+                            FROM 
+                            (
+                            SELECT p.HOSPCODE,o.hosname as HNAME
+                            ,sum(if(p.SEX='1',1,0)) as male
+                            ,sum(if(p.SEX='2',1,0)) as female
+                            ,sum(if(p.SEX in ('1','2'),1,0)) as total
+                            ,count(DISTINCT h.HOSPCODE,h.HID)  as nhouse  
+                            FROM person p
+                            LEFT JOIN home h
+                            ON p.HOSPCODE=h.HOSPCODE AND p.HID=h.HID 
+                            LEFT JOIN chospital  o
+                            ON p.HOSPCODE=o.hoscode  
+                            WHERE p.TYPEAREA in ('1','3') 
+                            AND p.DISCHARGE in ('9','')
+                            GROUP BY p.HOSPCODE
+                            ORDER BY o.subdistcode,p.HOSPCODE
+                            ) as t0) as count_alias.
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (29)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/02 08:16:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't0.hosname' in 'field list'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT t0.HOSPCODE,t0.hosname 
+                            ,t0.male,t0.female,t0.total,t0.nhouse
+                            FROM 
+                            (
+                            SELECT p.HOSPCODE,o.hosname as HNAME
+                            ,sum(if(p.SEX='1',1,0)) as male
+                            ,sum(if(p.SEX='2',1,0)) as female
+                            ,sum(if(p.SEX in ('1','2'),1,0)) as total
+                            ,count(DISTINCT h.HOSPCODE,h.HID)  as nhouse  
+                            FROM person p
+                            LEFT JOIN home h
+                            ON p.HOSPCODE=h.HOSPCODE AND p.HID=h.HID 
+                            LEFT JOIN chospital  o
+                            ON p.HOSPCODE=o.hoscode  
+                            WHERE p.TYPEAREA in ('1','3') 
+                            AND p.DISCHARGE in ('9','')
+                            GROUP BY p.HOSPCODE
+                            ORDER BY o.subdistcode,p.HOSPCODE
+                            ) as t0) as count_alias' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(29): CDbCommand->queryScalar()
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): PersonController->actionIndex()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('person')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=person
+---
+2015/02/02 08:28:53 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\personvillage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(73): PersonController->render()
+#3 unknown(0): PersonController->actionPersonVillage()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/personvillage&hospcode=10727
+in D:\xampp\htdocs\mddata\protected\views\person\personvillage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (73)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/03 00:40:37 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.detail" is not defined.' in D:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\auth\CWebUser.php(146): CComponent->__get('detail')
+#1 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(400): CWebUser->__get('detail')
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VaccinedController->actionStatus()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('status')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/status')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/status
+---
+2015/02/03 00:42:19 [error] [php] Undefined index: HOSPNAME (D:\xampp\htdocs\mddata\protected\views\vaccined\coverage.php:110)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(59): VaccinedController->render()
+#3 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VaccinedController->actionCoverage()
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/coverage
+in D:\xampp\htdocs\mddata\protected\views\vaccined\coverage.php (110)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (59)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/03 16:23:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "post/view".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('post/view')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=post/view&id=12
+HTTP_REFERER=http://localhost/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 02:58:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [2002] A socket operation was attempted to an unreachable host.
+' in D:\xampp\htdocs\yii\framework\db\CDbConnection.php:399
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbConnection.php(347): CDbConnection->open()
+#1 D:\xampp\htdocs\yii\framework\db\CDbConnection.php(325): CDbConnection->setActive(true)
+#2 D:\xampp\htdocs\yii\framework\base\CModule.php(394): CDbConnection->init()
+#3 D:\xampp\htdocs\yii\framework\base\CModule.php(103): CModule->getComponent('db')
+#4 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(282): CModule->__get('db')
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): LabfuController->ActionHba1c()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('hba1c')
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/hba1c')
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#13 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 03:45:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "vaccine/performance".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccine/perform...')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=vaccine/performance
+---
+2015/02/04 05:17:43 [error] [php] Trying to get property of non-object (D:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): CDataColumn->getDataCellContent()
+#1 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): CDataColumn->renderDataCellContent()
+#2 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): CDataColumn->renderDataCell()
+#3 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): CGridView->renderDataCell()
+#4 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): CGridView->renderTableRow()
+#5 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): CGridView->renderTableBody()
+#6 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): CGridView->renderItems()
+#7 unknown(0): CGridView->renderSection()
+#8 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#9 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): CGridView->renderContent()
+#10 D:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CGridView->run()
+#11 D:\xampp\htdocs\mddata\protected\views\labfu\detail.php(74): LabfuController->widget()
+#12 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#13 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): LabfuController->renderInternal()
+#14 D:\xampp\htdocs\yii\framework\web\CController.php(869): LabfuController->renderFile()
+#15 D:\xampp\htdocs\yii\framework\web\CController.php(782): LabfuController->renderPartial()
+#16 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(369): LabfuController->render()
+#17 unknown(0): LabfuController->ActionDetail()
+#18 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#19 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#20 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#21 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#22 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#23 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#24 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#26 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/detail&hospcode=07711
+in D:\xampp\htdocs\mddata\protected\views\labfu\detail.php (74)
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (369)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 05:17:52 [error] [php] Trying to get property of non-object (D:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): CDataColumn->getDataCellContent()
+#1 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): CDataColumn->renderDataCellContent()
+#2 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): CDataColumn->renderDataCell()
+#3 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): CGridView->renderDataCell()
+#4 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): CGridView->renderTableRow()
+#5 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): CGridView->renderTableBody()
+#6 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): CGridView->renderItems()
+#7 unknown(0): CGridView->renderSection()
+#8 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#9 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): CGridView->renderContent()
+#10 D:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CGridView->run()
+#11 D:\xampp\htdocs\mddata\protected\views\labfu\detail.php(74): LabfuController->widget()
+#12 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#13 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): LabfuController->renderInternal()
+#14 D:\xampp\htdocs\yii\framework\web\CController.php(869): LabfuController->renderFile()
+#15 D:\xampp\htdocs\yii\framework\web\CController.php(782): LabfuController->renderPartial()
+#16 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(369): LabfuController->render()
+#17 unknown(0): LabfuController->ActionDetail()
+#18 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#19 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#20 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#21 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#22 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#23 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#24 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#26 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/detail&hospcode=07718
+in D:\xampp\htdocs\mddata\protected\views\labfu\detail.php (74)
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (369)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 06:41:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detail".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('detail')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('detail')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/detail')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/detail&hospcode=07718
+HTTP_REFERER=http://localhost/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 06:42:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detail".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('detail')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('detail')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/detail')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/detail&hospcode=07711
+HTTP_REFERER=http://localhost/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 06:42:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detail".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('detail')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('detail')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/detail')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/detail&hospcode=07718
+HTTP_REFERER=http://localhost/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 06:44:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detail".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('detail')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('detail')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/detail')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/detail&hospcode=07718
+HTTP_REFERER=http://localhost/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 10:06:46 [error] [php] Undefined index: hospcode (D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php:140)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/regdm
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (140)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:42:30 [error] [php] Undefined index: CID (D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php:344)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/lastlab
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (344)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:42:33 [error] [php] Undefined index: CID (D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php:344)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/lastlab
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (344)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:42:44 [error] [php] Undefined index: CID (D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php:344)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/LastLab
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (344)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:43:05 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't2.describe' in 'field list'. The SQL statement executed was: SELECT t0.hospcode,t0.pid
+                            ,t1.date_serv,t1.labtest,t2.describe,t2.std_value
+                            ,t1.labresult
+                            FROM 
+                            (
+                            SELECT HOSPCODE,PID,GROUP_CONCAT(DATE_SERV ORDER BY DATE_SERV DESC   SEPARATOR ',' ) as date_lab
+                            FROM labfu 
+                            GROUP BY HOSPCODE,PID 
+                            ) as t0 
+                            LEFT JOIN 
+                            (
+                            SELECT * FROM labfu 
+                            ) t1 
+                            ON t0.hospcode=t1.hospcode AND t0.pid=t1.pid AND substr(t0.date_lab,1,10)=t1.date_serv
+                            LEFT JOIN co_labfu t2
+                            ON t1.labtest=t2.id
+                            WHERE t0.hospcode='07711' AND t0.PID='000038' 
+                            GROUP BY t1.date_serv,t1.labtest
+                            ORDER BY t0.pid.
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (366)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:43:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't2.describe' in 'field list'. The SQL statement executed was: SELECT t0.hospcode,t0.pid
+                            ,t1.date_serv,t1.labtest,t2.describe,t2.std_value
+                            ,t1.labresult
+                            FROM 
+                            (
+                            SELECT HOSPCODE,PID,GROUP_CONCAT(DATE_SERV ORDER BY DATE_SERV DESC   SEPARATOR ',' ) as date_lab
+                            FROM labfu 
+                            GROUP BY HOSPCODE,PID 
+                            ) as t0 
+                            LEFT JOIN 
+                            (
+                            SELECT * FROM labfu 
+                            ) t1 
+                            ON t0.hospcode=t1.hospcode AND t0.pid=t1.pid AND substr(t0.date_lab,1,10)=t1.date_serv
+                            LEFT JOIN co_labfu t2
+                            ON t1.labtest=t2.id
+                            WHERE t0.hospcode='07711' AND t0.PID='000038' 
+                            GROUP BY t1.date_serv,t1.labtest
+                            ORDER BY t0.pid' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(366): CDbCommand->queryAll()
+#2 [internal function]: LabfuController->actionLastLab(NULL)
+#3 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs(Object(LabfuController), Array)
+#4 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(LabfuController), Object(ReflectionMethod), Array)
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('LastLab')
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/LastLab')
+#10 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#11 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#12 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/LastLab
+---
+2015/02/04 10:43:39 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\labfu\lastlab.php:7)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): LabfuController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): LabfuController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(378): LabfuController->render()
+#3 unknown(0): LabfuController->actionLastLab()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/LastLab
+in D:\xampp\htdocs\mddata\protected\views\labfu\lastlab.php (7)
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (378)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:43:59 [error] [php] Undefined index: HOSPCODE (D:\xampp\htdocs\yii\framework\web\CArrayDataProvider.php:111)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): CGridView->renderKeys()
+#1 D:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CGridView->run()
+#2 D:\xampp\htdocs\mddata\protected\views\labfu\lastlab.php(59): LabfuController->widget()
+#3 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#4 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): LabfuController->renderInternal()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(869): LabfuController->renderFile()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(782): LabfuController->renderPartial()
+#7 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(378): LabfuController->render()
+#8 unknown(0): LabfuController->actionLastLab()
+#9 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#10 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#11 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#13 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#14 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#15 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#17 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/LastLab
+in D:\xampp\htdocs\mddata\protected\views\labfu\lastlab.php (59)
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (378)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 10:44:23 [error] [php] Undefined index: HOSPCODE (D:\xampp\htdocs\yii\framework\web\CArrayDataProvider.php:111)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): CGridView->renderKeys()
+#1 D:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CGridView->run()
+#2 D:\xampp\htdocs\mddata\protected\views\labfu\lastlab.php(59): LabfuController->widget()
+#3 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#4 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): LabfuController->renderInternal()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(869): LabfuController->renderFile()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(782): LabfuController->renderPartial()
+#7 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(378): LabfuController->render()
+#8 unknown(0): LabfuController->actionLastLab()
+#9 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#10 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#11 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 D:\xampp\htdocs\yii\framework\web\CController.php(286): LabfuController->runAction()
+#13 D:\xampp\htdocs\yii\framework\web\CController.php(265): LabfuController->runActionWithFilters()
+#14 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): LabfuController->run()
+#15 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#17 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=labfu/LastLab
+in D:\xampp\htdocs\mddata\protected\views\labfu\lastlab.php (59)
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (378)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 11:12:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "register".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('register')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('register')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/register')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=site/register
+---
+2015/02/04 14:18:22 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id.
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (120)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 14:18:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(120): CDbCommand->queryAll()
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): LabfuController->actionHba1c()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('hba1c')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/hba1c')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/hba1c
+---
+2015/02/04 14:18:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "chronic".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('chronic')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=chronic
+---
+2015/02/04 14:39:54 [error] [exception.CException] exception 'CException' with message 'ChronicsController cannot find the requested view "coverage".' in D:\xampp\htdocs\yii\framework\web\CController.php:878
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('coverage', Array, true)
+#1 D:\xampp\htdocs\mddata\protected\controllers\ChronicsController.php(32): CController->render('coverage', Array)
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): ChronicsController->actionIndex()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('chronics')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=chronics
+---
+2015/02/04 14:40:14 [error] [php] Undefined index: Tambon (D:\xampp\htdocs\yii\framework\web\CArrayDataProvider.php:111)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): CGridView->renderKeys()
+#1 D:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CGridView->run()
+#2 D:\xampp\htdocs\mddata\protected\views\chronics\index.php(44): ChronicsController->widget()
+#3 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#4 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): ChronicsController->renderInternal()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(869): ChronicsController->renderFile()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(782): ChronicsController->renderPartial()
+#7 D:\xampp\htdocs\mddata\protected\controllers\ChronicsController.php(32): ChronicsController->render()
+#8 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): ChronicsController->actionIndex()
+#9 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#10 D:\xampp\htdocs\yii\framework\web\CController.php(286): ChronicsController->runAction()
+#11 D:\xampp\htdocs\yii\framework\web\CController.php(265): ChronicsController->runActionWithFilters()
+#12 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): ChronicsController->run()
+#13 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#15 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=chronics
+in D:\xampp\htdocs\mddata\protected\views\chronics\index.php (44)
+in D:\xampp\htdocs\mddata\protected\controllers\ChronicsController.php (32)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 15:11:18 [error] [php] Undefined index: id (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:689)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/viewdetail&hospcode=07711&vactype=091&startdate=2014-10-01&enddate=2015-09-30
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (689)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 15:11:23 [error] [php] Undefined index: id (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:689)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/viewdetail&hospcode=07713&vactype=091&startdate=2014-10-01&enddate=2015-09-30
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (689)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 16:50:34 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id.
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (120)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/04 16:50:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(120): CDbCommand->queryAll()
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): LabfuController->actionHba1c()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('hba1c')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/hba1c')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/hba1c
+---
+2015/02/05 01:01:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "chekage".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('chekage')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('chekage')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/chekag...')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/chekage
+---
+2015/02/05 01:42:24 [error] [php] Undefined variable: vaccname (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:567)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (567)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 01:42:57 [error] [php] Undefined variable: vaccname (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:567)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (567)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 01:55:35 [error] [php] Undefined variable: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:552)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (552)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 01:55:53 [error] [php] Undefined variable: vaccinename (D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php:3)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(556): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionCheckAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php (3)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (556)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 01:59:28 [error] [php] Undefined variable: sql (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:540)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (540)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 01:59:53 [error] [php] Undefined variable: sql (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:540)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (540)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 02:01:34 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:552)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (552)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 02:09:08 [error] [php] Undefined variable: id (D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php:20)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(561): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionCheckAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php (20)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (561)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 02:27:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id.
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (120)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 02:27:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(120): CDbCommand->queryAll()
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): LabfuController->actionHba1c()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('hba1c')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/hba1c')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/hba1c
+---
+2015/02/05 05:34:32 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:123)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (123)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:34:58 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(123): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (123)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:35:23 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(123): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (123)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:35:29 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(123): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (123)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:35:37 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(123): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (123)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:38:10 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(126): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (126)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:38:39 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(126): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/FindAge
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (126)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:39:50 [error] [php] Undefined variable: model (D:\xampp\htdocs\mddata\protected\views\person\findage.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(126): PersonController->render()
+#3 unknown(0): PersonController->actionFindAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/FindAge
+in D:\xampp\htdocs\mddata\protected\views\person\findage.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (126)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:45:33 [error] [php] Undefined index: hospcode (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:46)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/PersonVillage&hcode=07715
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (46)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:45:50 [error] [php] Undefined index: hospcode (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:46)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/PersonVillage&hoscode=07715
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (46)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:48:42 [error] [exception.CException] exception 'CException' with message 'PersonController cannot find the requested view "fingage".' in D:\xampp\htdocs\yii\framework\web\CController.php:878
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('fingage', Array, true)
+#1 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(107): CController->render('fingage', Array)
+#2 [internal function]: PersonController->actionFindAge(NULL, NULL)
+#3 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs(Object(PersonController), Array)
+#4 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PersonController), Object(ReflectionMethod), Array)
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('findage')
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('person/findage')
+#10 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#11 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#12 {main}
+REQUEST_URI=/mddata/index.php?r=person/findage
+---
+2015/02/05 05:49:34 [error] [exception.CException] exception 'CException' with message 'PersonController cannot find the requested view "fingage".' in D:\xampp\htdocs\yii\framework\web\CController.php:878
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('fingage', Array, true)
+#1 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(107): CController->render('fingage', Array)
+#2 [internal function]: PersonController->actionFindAge(NULL, NULL)
+#3 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs(Object(PersonController), Array)
+#4 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PersonController), Object(ReflectionMethod), Array)
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('findage')
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('person/findage')
+#10 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#11 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#12 {main}
+REQUEST_URI=/mddata/index.php?r=person/findage
+---
+2015/02/05 05:52:22 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:82)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (82)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:52:26 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:82)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (82)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:52:52 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:82)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (82)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 05:52:55 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:82)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (82)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 08:57:33 [error] [php] Undefined index:  (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:81)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (81)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 08:57:38 [error] [php] Undefined index:  (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:81)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (81)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 08:58:38 [error] [php] Undefined index:  (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:81)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (81)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 08:58:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "findage?x=5".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('findage?x=5')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('findage?x=5')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('person/findage?...')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=person/findage?x=5
+---
+2015/02/05 09:00:49 [error] [php] Undefined variable: vaccname (D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php:3)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(523): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionCheckAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage&0%5Bvaccinetype%5D=BCG
+in D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php (3)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (523)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:00:54 [error] [php] Undefined variable: vaccname (D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php:3)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(523): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionCheckAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php (3)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (523)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:01:30 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php:26)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(523): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionCheckAge()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\views\vaccined\checkage.php (26)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (523)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:02:22 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:514)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (514)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:02:25 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:514)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (514)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:03:00 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:514)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (514)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:04:22 [error] [php] Undefined variable: sql (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:502)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (502)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:04:32 [error] [php] Undefined variable: sql (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:502)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (502)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:06:22 [error] [php] Undefined variable: sql (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:502)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/checkage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (502)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:35:45 [error] [php] Undefined index: hospcode (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:144)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/coveragevillage
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (144)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:36:13 [error] [php] Undefined index:  (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:81)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (81)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:53:40 [error] [php] Undefined index:  (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:81)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (81)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:56:05 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:85)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (85)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:56:11 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:85)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (85)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:57:31 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:85)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (85)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:57:35 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:85)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (85)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:57:52 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:85)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (85)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 09:59:40 [error] [php] Undefined index: x (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:85)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (85)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 10:08:33 [error] [php] Undefined offset: 0 (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:126)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (126)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 10:09:06 [error] [php] Undefined offset: 0 (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:126)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (126)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 10:22:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ncdscreen".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('ncdscreen')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=ncdscreen
+---
+2015/02/05 10:57:48 [error] [php] Undefined variable: dataProvider (D:\xampp\htdocs\mddata\protected\views\person\index.php:21)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): PersonController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): PersonController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\PersonController.php(42): PersonController->render()
+#3 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): PersonController->actionIndex()
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person
+in D:\xampp\htdocs\mddata\protected\views\person\index.php (21)
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (42)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 14:56:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ncdscreen".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('ncdscreen')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=ncdscreen
+---
+2015/02/05 23:28:03 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id.
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (120)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:28:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(120): CDbCommand->queryAll()
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): LabfuController->actionHba1c()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('hba1c')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/hba1c')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/hba1c
+---
+2015/02/05 23:33:51 [error] [php] Undefined index: hospcode (D:\xampp\htdocs\mddata\protected\views\vaccined\missvaccine.php:5)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(258): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionMissVaccine()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/missvaccine
+in D:\xampp\htdocs\mddata\protected\views\vaccined\missvaccine.php (5)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (258)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:37:30 [error] [php] Undefined index: VILLAGEID (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:230)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/missvaccine&hospcode=07714&vaccinetype=083
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (230)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:39:14 [error] [php] Undefined index: VILLAGEID (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:229)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/missvaccine&hospcode=07714&vaccinetype=061
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (229)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:41:29 [error] [php] Undefined index: vaccinetype (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:230)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/missvaccine&hospcode=07714&VILLAGEID=67010402
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (230)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:53:50 [error] [php] Undefined index: vaccinetype (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:229)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/missvaccine&hospcode=07714&VILLAGEID=67010413
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (229)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:55:14 [error] [php] Undefined index: vaccinetype (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:229)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/missvaccine&hospcode=07714&VILLAGEID=67010413
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (229)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/05 23:58:04 [error] [php] Undefined variable: MMR (D:\xampp\htdocs\mddata\protected\views\vaccined\coveragevillage.php:100)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): CDataColumn->evaluateExpression()
+#1 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): CDataColumn->getDataCellContent()
+#2 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): CDataColumn->renderDataCellContent()
+#3 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): CDataColumn->renderDataCell()
+#4 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): CGridView->renderDataCell()
+#5 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): CGridView->renderTableRow()
+#6 D:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): CGridView->renderTableBody()
+#7 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): CGridView->renderItems()
+#8 unknown(0): CGridView->renderSection()
+#9 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 D:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): CGridView->renderContent()
+#11 D:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CGridView->run()
+#12 D:\xampp\htdocs\mddata\protected\views\vaccined\coveragevillage.php(144): VaccinedController->widget()
+#13 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): VaccinedController->renderInternal()
+#15 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#16 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#17 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(221): VaccinedController->render()
+#18 unknown(0): VaccinedController->actionCoverageVillage()
+#19 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#20 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#21 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#22 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#23 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#24 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#25 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#27 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/coveragevillage&hospcode=07714
+in D:\xampp\htdocs\mddata\protected\views\vaccined\coveragevillage.php (100)
+in D:\xampp\htdocs\mddata\protected\views\vaccined\coveragevillage.php (144)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (221)
+2015/02/06 00:19:44 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in D:\xampp\htdocs\yii\framework\web\CController.php:336
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('DETAIL')
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/DETAIL')
+#5 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#7 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/DETAIL
+---
+2015/02/06 00:19:59 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in D:\xampp\htdocs\yii\framework\web\CController.php:336
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('detail')
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/detail')
+#5 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#7 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/detail
+---
+2015/02/06 00:20:28 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in D:\xampp\htdocs\yii\framework\web\CController.php:336
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('viewdetail')
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/viewde...')
+#5 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#7 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/viewdetail
+---
+2015/02/06 00:21:46 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in D:\xampp\htdocs\yii\framework\web\CController.php:336
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('viewdetail')
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/viewde...')
+#5 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#7 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/viewdetail&hospcode=07711
+HTTP_REFERER=http://localhost/mddata/index.php?r=vaccined/performance
+---
+2015/02/06 00:22:00 [error] [php] Undefined index: id (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:651)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/viewdetail&hospcode=07711&vactype=010&startdate=2014-10-01&enddate=2015-09-30
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (651)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 00:31:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "lenwarnig".' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('lenwarnig')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('lenwarnig')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/lenwar...')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#5 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarnig
+---
+2015/02/06 00:31:32 [error] [exception.CException] exception 'CException' with message 'VaccinedController cannot find the requested view "lenwarnig".' in D:\xampp\htdocs\yii\framework\web\CController.php:878
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('lenwarnig', Array, true)
+#1 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(617): CController->render('lenwarnig', Array)
+#2 [internal function]: VaccinedController->actionLenWarning(NULL)
+#3 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs(Object(VaccinedController), Array)
+#4 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(VaccinedController), Object(ReflectionMethod), Array)
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('lenwarning')
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/lenwar...')
+#10 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#11 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#12 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+---
+2015/02/06 00:31:55 [error] [php] Undefined variable: vaccinetype (D:\xampp\htdocs\mddata\protected\views\vaccined\lenwarning.php:3)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(617): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionLenWarning()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\views\vaccined\lenwarning.php (3)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (617)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 00:32:31 [error] [php] Undefined variable: vaccinetype (D:\xampp\htdocs\mddata\protected\views\vaccined\lenwarning.php:3)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(617): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionLenWarning()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\views\vaccined\lenwarning.php (3)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (617)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 00:58:00 [error] [exception.CException] exception 'CException' with message 'VaccinedController cannot find the requested view "dhbv_lenwarning".' in D:\xampp\htdocs\yii\framework\web\CController.php:878
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('dhbv_lenwarning', Array, true)
+#1 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(575): CController->render('dhbv_lenwarning', Array)
+#2 [internal function]: VaccinedController->actionLenWarning(NULL)
+#3 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs(Object(VaccinedController), Array)
+#4 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(VaccinedController), Object(ReflectionMethod), Array)
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('lenwarning')
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('vaccined/lenwar...')
+#10 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#11 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#12 {main}
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+---
+2015/02/06 01:03:24 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\views\vaccined\dhbv_lenwarning.php:57)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(869): VaccinedController->renderFile()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(782): VaccinedController->renderPartial()
+#2 D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php(575): VaccinedController->render()
+#3 unknown(0): VaccinedController->actionLenWarning()
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs()
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#9 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\views\vaccined\dhbv_lenwarning.php (57)
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (575)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:05:01 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:05:39 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:06:33 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:08:06 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:09:00 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:09:51 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 01:10:03 [error] [php] Undefined index: vaccinename (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:549)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#3 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/lenwarning
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (549)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 11:02:00 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id.
+in D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php (120)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 11:02:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.id' in 'on clause'. The SQL statement executed was: SELECT 
+                            o.off_id as HOSPCODE,o.off_name as HNAME
+                            ,t0.nDM
+                            ,sum(if((t1.LABRESULT > 0),1,0)) as TOTAL 
+                            ,round((sum(if((t1.LABRESULT > 0),1,0))/t0.nDM*100),2)  as percent1
+                            ,sum(if((t1.LABRESULT < 7 ),1,0)) as LOWRISK
+                            ,round(((sum(if((t1.LABRESULT < 7 ),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent2
+
+                            ,sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0)) as ATRISK
+                            ,round(((sum(if((t1.LABRESULT BETWEEN 7 and 100),1,0))/sum(if((t1.LABRESULT > 0),1,0)))*100),2) as percent3
+                            FROM co_office o
+                            LEFT JOIN 
+                            (
+                            SELECT HOSPCODE,sum(if(NOT ISNULL(DM_DX_ASC),1,0 )) as nDM FROM tmp_me_chronic GROUP BY HOSPCODE
+                            ) t0
+                            ON o.off_id=t0.HOSPCODE 
+                            LEFT JOIN 
+                            (
+                            SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,round((DATEDIFF(CURDATE(),p.BIRTH)/365.25),0) as age 
+                            ,GROUP_CONCAT(l.DATE_SERV ORDER BY l.DATE_SERV DESC   SEPARATOR ',' ) as LABDATE
+                            ,GROUP_CONCAT(l.labresult ORDER BY l.DATE_SERV DESC  SEPARATOR ',' ) as LABRESULT
+                            FROM  tmp_me_chronic p 
+                            LEFT JOIN labfu l
+                            ON l.HOSPCODE=p.HOSPCODE AND l.PID=p.PID 
+                            LEFT JOIN co_labfu c
+                            ON l.LABTEST=c.id
+                            LEFT JOIN service s
+                            ON l.HOSPCODE=s.HOSPCODE AND l.PID=s.PID AND l.SEQ=s.SEQ 
+                            WHERE NOT ISNULL(p.DM_DX_ASC) AND 
+                            l.labtest='05'  
+                            GROUP BY p.HOSPCODE,p.PID
+                            HAVING substr(LABDATE,1,10) BETWEEN '2013-10-01' AND '2014-09-30'
+                            ) as t1
+                            ON t0.hospcode=t1.hospcode
+                            WHERE o.distid='6701' AND o.off_type in ('03','06')
+                            GROUP BY o.off_id' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\xampp\htdocs\mddata\protected\controllers\LabfuController.php(120): CDbCommand->queryAll()
+#2 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): LabfuController->actionHba1c()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('hba1c')
+#7 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('labfu/hba1c')
+#8 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#10 {main}
+REQUEST_URI=/mddata/index.php?r=labfu/hba1c
+---
+2015/02/06 12:28:47 [error] [php] Undefined index: id (D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php:641)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): VaccinedController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): VaccinedController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VaccinedController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=vaccined/viewdetail&hospcode=07713&vactype=085&startdate=2014-10-01&enddate=2015-09-30
+in D:\xampp\htdocs\mddata\protected\controllers\VaccinedController.php (641)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/06 13:38:03 [error] [php] Undefined offset: 0 (D:\xampp\htdocs\mddata\protected\controllers\PersonController.php:115)
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(286): PersonController->runAction()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(265): PersonController->runActionWithFilters()
+#4 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PersonController->run()
+#5 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\xampp\htdocs\mddata\index.php(12): CWebApplication->run()
+REQUEST_URI=/mddata/index.php?r=person/findage
+in D:\xampp\htdocs\mddata\protected\controllers\PersonController.php (115)
+in D:\xampp\htdocs\mddata\index.php (12)
+2015/02/07 09:58:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "chronic".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('chronic')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=chronic
+---
+2015/02/07 09:58:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "chronic/index".' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('chronic/index')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\mddata\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/mddata/index.php?r=chronic/index
+---

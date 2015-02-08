@@ -6,7 +6,7 @@
     <?php 
 $this->widget('zii.widgets.CBreadcrumbs', array(
     'links'=>array(
-        'HbA1C'=>array('labfu/hba1c'),
+        'การตรวจ HbA1C รายหน่วยบริการ'=>array('labfu/hba1c'),
         'DM Registration',
     ),
 ));
@@ -30,7 +30,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
            //  'htmlOptions' => array("width" => "10%", 'style' => 'text-align: left;')
         ),
         array(
-            'header' => 'หน่วยบริการ',
+            'header' => 'เลขประจำตัวประชาชน',
             'name' => 'CID',
         ),
         array(
