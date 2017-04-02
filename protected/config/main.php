@@ -1,9 +1,9 @@
 <?php
 // กรณียังไม่มี
-$host = '203.157.213.69';
+$host = 'localhost';
 $user = 'root';
-$pass = '6701sso';
-$db = 'hdc';
+$pass = '123456';
+$db = 'mydb';
 
 // @include_once 'config.php'; // ใส่ @ ดักไว้ถ้า error ให้โยน error ทิ้ง 
 
