@@ -1,5 +1,5 @@
 <?php
-// กรณียังไม่มี
+
 $host = 'localhost';
 $user = 'root';
 $pass = '123456';
